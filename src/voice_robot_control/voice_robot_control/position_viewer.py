@@ -31,7 +31,7 @@ from geometry_msgs.msg import PoseStamped
 from sensor_msgs.msg import JointState
 from std_msgs.msg import String
 
-from .pose_utils import quat_to_rpy_deg, quat_to_wrist_deg
+from .core.pose_utils import quat_to_rpy_deg, quat_to_wrist_deg
 
 
 def _n(value: float, digits: int) -> str:

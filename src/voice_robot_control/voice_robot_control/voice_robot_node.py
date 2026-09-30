@@ -47,13 +47,13 @@ from ament_index_python.packages import get_package_share_directory
 from rclpy.logging import get_logger
 from std_msgs.msg import String
 
-from .gripper_control import connect_gripper, is_gripping, wait_until_done
-from .robot_common import (
+from .core.gripper_control import connect_gripper, is_gripping, wait_until_done
+from .core.robot_common import (
     current_tcp, go_home, make_home_state, make_joint_state, make_plan_params,
     make_pose, plan_and_execute, setup_robot,
 )
 # 말하기(TTS) 는 ⑨ blocks.py 와 똑같은 것을 쓴다.
-from .speaker import Speaker
+from .core.speaker import Speaker
 
 
 # ══════════════════════════════════════════════════════════
@@ -531,7 +531,7 @@ def main(args=None):
         worker.gripper.close_connection()
 
     logger.info("=== ⑧ 음성 명령 실행 끝 ===")
-    from .robot_common import finish
+    from .core.robot_common import finish
     finish(logger)
 
 

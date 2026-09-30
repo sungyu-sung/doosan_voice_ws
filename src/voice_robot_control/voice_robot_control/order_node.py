@@ -49,7 +49,7 @@ order_node.py — ⑨ 말로 시키는 로봇 (팀 프로젝트)
 
 import time
 
-from .blocks import (
+from .core.blocks import (
     준비, 말하기, 듣기, 홈으로, 이동, 그리퍼, 끝내기,
 )
 

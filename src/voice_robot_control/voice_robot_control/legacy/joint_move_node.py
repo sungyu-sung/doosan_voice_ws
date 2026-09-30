@@ -28,7 +28,7 @@ move_node 는 "손끝을 어디에 둘까(x, y, z)" 를 정해서 움직였다.
 import rclpy
 from rclpy.logging import get_logger
 
-from .robot_common import (
+from ..core.robot_common import (
     HOME_JOINTS_DEG, finish, go_home, make_home_state, make_joint_state,
     make_plan_params, move_to_joints, setup_robot,
 )

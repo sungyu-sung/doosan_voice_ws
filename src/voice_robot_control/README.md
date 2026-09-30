@@ -689,30 +689,32 @@ ros2 topic pub --once /record_pose std_msgs/msg/String "data: '내자리'"
 
 ```
 voice_robot_control/
-├── move_node.py            ① 단순 이동 (좌표)
-├── joint_move_node.py      ①-2 관절 이동 (각도)
-├── waypoint_node.py        ② 여러 지점
-├── gripper_node.py         ③ 그리퍼
-├── pick_place_node.py      ④ 집어서 옮기기
-├── gear_assembly_node.py   ⑤ 기어 조립
+├── legacy/                 #5 실습 노드 (현재 강의에서는 사용하지 않음)
+│   ├── move_node.py            ① 단순 이동 (좌표)
+│   ├── joint_move_node.py      ①-2 관절 이동 (각도)
+│   ├── waypoint_node.py        ② 여러 지점
+│   ├── gripper_node.py         ③ 그리퍼
+│   ├── pick_place_node.py      ④ 집어서 옮기기
+│   └── gear_assembly_node.py   ⑤ 기어 조립
 ├── stt_node.py             ⑥ 음성 인식
 ├── nlp_node.py             ⑦ 말 → 로봇 명령
 ├── voice_robot_node.py     ⑧ 명령 → 로봇 동작
 ├── order_node.py           ⑨ 말로 시키는 로봇 (팀 프로젝트, 학생이 고치는 파일)
 ├── position_viewer.py      손끝 위치 보기
+├── launch_helper.py        launch 파일 공용 부분
 │
-├── blocks.py               ⑨ 가 쓰는 블록 (말하기/듣기/이동/그리퍼)
-├── robot_common.py         여러 노드가 함께 쓰는 부분
-│                           (홈 자세, 안전 영역, 경로 계획+실행)
-├── gripper_control.py      그리퍼 연결 (실물 없으면 시늉)
-├── speaker.py              말하기 (TTS) — ⑧ 과 ⑨ 가 같이 씁니다
-│
-│  [학생이 고치는 파일]
-│  config/keyword_map.yaml   어떤 말을 어떤 명령으로 볼지
-│  config/my_actions.yaml    우리 팀이 만드는 새 동작
-├── egp_c40.py              EGP-C 40 그리퍼 드라이버
-├── pose_utils.py           각도 ↔ 쿼터니언 변환
-└── launch_helper.py        launch 파일 공용 부분
+└── core/                   학생이 고치지 않는 공용 부품
+    ├── robot_common.py         여러 노드가 함께 쓰는 부분
+    │                           (홈 자세, 안전 영역, 경로 계획+실행)
+    ├── gripper_control.py      그리퍼 연결 (실물 없으면 시늉)
+    ├── egp_c40.py              EGP-C 40 그리퍼 드라이버
+    ├── speaker.py              말하기 (TTS) — ⑧ 과 ⑨ 가 같이 씁니다
+    ├── pose_utils.py           각도 ↔ 쿼터니언 변환
+    └── blocks.py               ⑨ 가 쓰는 블록 (말하기/듣기/이동/그리퍼)
+
+학생이 고치는 설정 파일은 config/ 에 있습니다.
+    config/keyword_map.yaml   어떤 말을 어떤 명령으로 볼지
+    config/my_actions.yaml    우리 팀이 만드는 새 동작
 ```
 
 로봇을 움직이는 방법 자체는 **`robot_common.py` 의 `plan_and_execute()` 한 곳**에

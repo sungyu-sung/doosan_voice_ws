@@ -35,8 +35,8 @@ pick_place_node.py — ④ 집어서 옮기기 노드  [Module-5]
 import rclpy
 from rclpy.logging import get_logger
 
-from .gripper_control import connect_gripper, is_gripping, wait_until_done
-from .robot_common import (
+from ..core.gripper_control import connect_gripper, is_gripping, wait_until_done
+from ..core.robot_common import (
     finish, go_home, make_home_state, make_plan_params, make_pose,
     plan_and_execute, setup_robot,
 )

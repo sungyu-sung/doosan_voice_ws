@@ -124,7 +124,7 @@ python3 -c "import speech_recognition, gtts, pygame; print('4. 파이썬 라이�
 
 ```bash
 cd ~
-git clone https://github.com/YoonHJ97/doosan_voice_ws.git
+git clone https://github.com/sungyu-sung/doosan_voice_ws.git
 cd doosan_voice_ws
 ```
 

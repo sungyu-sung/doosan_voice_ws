@@ -26,12 +26,12 @@ setup(
     entry_points={
         'console_scripts': [
             # ① 단순 이동  ② 여러 지점  ③ 그리퍼  ④ 집어서 옮기기  ⑤ 기어 조립
-            'move_node          = voice_robot_control.move_node:main',
-            'joint_move_node    = voice_robot_control.joint_move_node:main',
-            'waypoint_node      = voice_robot_control.waypoint_node:main',
-            'gripper_node       = voice_robot_control.gripper_node:main',
-            'pick_place_node    = voice_robot_control.pick_place_node:main',
-            'gear_assembly_node = voice_robot_control.gear_assembly_node:main',
+            'move_node          = voice_robot_control.legacy.move_node:main',
+            'joint_move_node    = voice_robot_control.legacy.joint_move_node:main',
+            'waypoint_node      = voice_robot_control.legacy.waypoint_node:main',
+            'gripper_node       = voice_robot_control.legacy.gripper_node:main',
+            'pick_place_node    = voice_robot_control.legacy.pick_place_node:main',
+            'gear_assembly_node = voice_robot_control.legacy.gear_assembly_node:main',
             # ⑥ 음성 인식 (로봇 없이 실행 가능)
             'stt_node           = voice_robot_control.stt_node:main',
             # ⑦ 말 → 로봇 명령 (로봇 없이 실행 가능)

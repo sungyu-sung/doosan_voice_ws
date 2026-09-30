@@ -76,7 +76,7 @@ def read_target(node, logger):
 def main(args=None):
     # 로봇 관련 도구는 여기서 불러온다.
     # (move.launch.py 가 위의 TARGET 값을 읽어갈 때 MoveIt 까지 필요하지 않도록)
-    from .robot_common import (
+    from ..core.robot_common import (
         describe_pos, finish, go_home, make_home_state, make_plan_params,
         make_pose, plan_and_execute, setup_robot,
     )

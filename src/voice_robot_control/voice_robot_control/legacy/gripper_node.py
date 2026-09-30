@@ -19,7 +19,7 @@ MoveIt 이 필요 없으므로 로봇 팔을 안 켜도 실행됩니다.
 import rclpy
 from rclpy.logging import get_logger
 
-from .gripper_control import connect_gripper, is_gripping, wait_until_done
+from ..core.gripper_control import connect_gripper, is_gripping, wait_until_done
 
 
 # ══════════════════════════════════════════════════════════
