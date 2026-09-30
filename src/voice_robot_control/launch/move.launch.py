@@ -22,7 +22,7 @@ from launch_ros.actions import Node
 from voice_robot_control.launch_helper import config_file, moveit_config, 실수
 # 기본값을 노드 파일에서 그대로 가져온다.
 # 이렇게 해야 학생이 move_node.py 의 TARGET 을 고쳤을 때 그 값이 그대로 쓰인다.
-from voice_robot_control.move_node import SPEED, TARGET
+from voice_robot_control.legacy.move_node import SPEED, TARGET
 
 
 def generate_launch_description():

@@ -65,7 +65,7 @@ ros2 launch dsr_bringup2 dsr_bringup2_moveit.launch.py mode:=virtual model:=m060
 
 # 실제 로봇
 ros2 launch dsr_bringup2 dsr_bringup2_moveit.launch.py \
-  mode:=real model:=m0609 host:=192.168.1.100
+  mode:=real model:=m0609 host:=192.168.137.100
 ```
 
 **터미널 2 — 하고 싶은 것 하나 고르기**
