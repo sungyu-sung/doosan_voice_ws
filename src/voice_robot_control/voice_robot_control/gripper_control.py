@@ -4,7 +4,7 @@ gripper_control.py — 그리퍼 연결을 도와주는 부품
 
 gripper_node 와 gear_assembly_node 가 함께 쓴다.
 
-실제 그리퍼(OnRobot RG2)는 onrobot.py 가 담당한다.
+실제 그리퍼(EGP-C 40)는 egp_c40.py 가 담당한다.
 여기서는 "그리퍼가 없거나 연결이 안 될 때도 수업이 멈추지 않도록"
 시늉만 하는 가짜 그리퍼를 대신 넣어 주는 일을 한다.
 """
@@ -93,7 +93,7 @@ def is_gripping(gripper, logger) -> bool:
         return False
 
 
-def connect_gripper(logger, use_gripper: bool, ip: str, port: int, name: str = "rg2"):
+def connect_gripper(logger, use_gripper: bool):
     """
     그리퍼를 연결한다. 실패하면 시늉만 하는 그리퍼를 돌려준다.
 
@@ -104,24 +104,17 @@ def connect_gripper(logger, use_gripper: bool, ip: str, port: int, name: str = "
         return DummyGripper(logger), False
 
     try:
-        from .onrobot import RG
-        gripper = RG(name, ip, port)
-        time.sleep(0.5)
+        # EGP-C 40 은 IP/포트 없이 로봇 플랜지 디지털 출력(DO1, DO2)으로 움직인다.
+        from .egp_c40 import EGPC40
+        gripper = EGPC40()
 
-        # 진짜 연결됐는지 직접 확인한다.
-        # onrobot.py 는 연결에 실패해도 아무 말이 없어서, 확인하지 않으면
-        # "연결 완료" 라고 해 놓고 그리퍼가 하나도 안 움직이게 된다.
-        status = gripper.get_status()
-        if not status:
-            raise ConnectionError("그리퍼가 상태를 알려주지 않습니다")
-
-        logger.info(f"그리퍼 연결 완료 ({ip}:{port})")
+        logger.info("그리퍼 연결 완료 (EGP-C 40, 플랜지 DO1/DO2)")
         return gripper, True
     except Exception as e:
         logger.error(
             f"그리퍼에 연결하지 못했습니다: {e}\n"
-            f"  · 그리퍼 IP 가 {ip} 가 맞는지 확인하세요\n"
-            f"  · pymodbus 가 설치돼 있는지 확인하세요 (pip install \"pymodbus==2.5.3\")\n"
+            "  · dsr_bringup2 가 떠 있는지 확인하세요\n"
+            "  · ros2_ws 를 source 했는지 확인하세요 (DSR_ROBOT2 를 찾을 수 있어야 합니다)\n"
             "  → 일단 시늉만 하고 계속 진행합니다."
         )
         return DummyGripper(logger), False

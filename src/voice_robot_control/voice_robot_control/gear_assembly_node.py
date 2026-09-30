@@ -87,8 +87,6 @@ USE_GRIPPER = True
 OPEN_WIDTH = 500        # 열었을 때 (50mm)
 CLOSE_WIDTH = 150       # 닫았을 때 (15mm)
 FORCE = 300             # 쥐는 힘 (30N)
-GRIPPER_IP = "192.168.1.1"
-GRIPPER_PORT = 502
 
 # 로봇 속도 (0에 가까울수록 느림)
 SPEED = 0.15
@@ -207,8 +205,7 @@ def main(args=None):
     logger.info("=== ⑤ 기어 조립 시작 ===")
 
     # ── 그리퍼 준비 (먼저 열어 둔다) ────────────────────
-    gripper, is_real = connect_gripper(
-        logger, USE_GRIPPER, GRIPPER_IP, GRIPPER_PORT)
+    gripper, is_real = connect_gripper(logger, USE_GRIPPER)
     gripper.move_gripper(width_val=OPEN_WIDTH, force_val=FORCE)
     wait_until_done(gripper, logger)
 

@@ -70,8 +70,6 @@ USE_GRIPPER = True
 OPEN_WIDTH = 500        # 열었을 때 (50mm)   ※ 단위가 1/10 mm 입니다
 CLOSE_WIDTH = 150       # 닫았을 때 (15mm)
 FORCE = 300             # 쥐는 힘 (30N)     ※ 단위가 1/10 N 입니다
-GRIPPER_IP = "192.168.1.1"
-GRIPPER_PORT = 502
 
 # 다 끝내고 홈으로 돌아갈까?
 RETURN_HOME = True
@@ -88,8 +86,7 @@ def main(args=None):
     logger.info("=== ④ 집어서 옮기기 시작 ===")
 
     # ── 그리퍼 준비 (먼저 열어 둔다) ────────────────────
-    gripper, is_real = connect_gripper(
-        logger, USE_GRIPPER, GRIPPER_IP, GRIPPER_PORT)
+    gripper, is_real = connect_gripper(logger, USE_GRIPPER)
     gripper.move_gripper(width_val=OPEN_WIDTH, force_val=FORCE)
     wait_until_done(gripper, logger)
 

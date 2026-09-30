@@ -41,11 +41,6 @@ FORCE = 300
 # 못 잡았을 때 몇 번까지 다시 해볼까?
 MAX_RETRY = 3
 
-# 그리퍼 연결 정보
-GRIPPER_NAME = "rg2"
-GRIPPER_IP = "192.168.1.1"
-GRIPPER_PORT = 502
-
 # ══════════════════════════════════════════════════════════
 
 
@@ -54,8 +49,7 @@ def main(args=None):
     logger = get_logger("gripper_node")
     logger.info("=== ③ 그리퍼 제어 시작 ===")
 
-    gripper, is_real = connect_gripper(
-        logger, USE_GRIPPER, GRIPPER_IP, GRIPPER_PORT, GRIPPER_NAME)
+    gripper, is_real = connect_gripper(logger, USE_GRIPPER)
 
     # ── 1) 먼저 열기 ────────────────────────────────────
     logger.info(f"그리퍼 열기 ({OPEN_WIDTH / 10:.0f}mm)")

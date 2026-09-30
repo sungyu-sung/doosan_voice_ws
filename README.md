@@ -6,7 +6,7 @@ ROS 2를 처음 접하는 학생이 **YAML 파일만 고쳐서** 로봇을 다�
 
 ```
 마이크 → 음성 인식 → 말을 명령으로 → 로봇 동작
-        (STT)        (NLP)         (MoveIt2 + RG2)
+        (STT)        (NLP)         (MoveIt2 + EGP-C 40)
 ```
 
 ## 들어 있는 노드
@@ -91,7 +91,7 @@ colcon build
 ```bash
 sudo apt update
 sudo apt install -y portaudio19-dev python3-dev
-pip install SpeechRecognition pyaudio gtts pygame "pymodbus==2.5.3"
+pip install SpeechRecognition pyaudio gtts pygame
 ```
 
 `pyaudio` 는 설치할 때 소스에서 컴파일됩니다. **먼저 `portaudio19-dev` 와
@@ -106,8 +106,6 @@ ERROR: Could not build wheels for pyaudio
 `speech_recognition 이 없습니다` 하고 노드가 죽습니다.
 apt 로 두 패키지를 깐 뒤 `pip install` 을 다시 하면 됩니다.
 
-`pymodbus` 는 **2.5.3** 이어야 합니다 (3.x 는 API 가 달라 그리퍼가 안 됩니다).
-
 ### 설치 확인
 
 ```bash
@@ -115,7 +113,7 @@ source ~/doosan_voice_ws/install/setup.bash
 python3 -c "import moveit_configs_utils; print('1. moveit_configs_utils OK')"
 python3 -c "from moveit.planning import MoveItPy; print('2. moveit_py OK')"
 ros2 pkg prefix dsr_moveit_config_m0609 && echo "3. 두산 패키지 OK"
-python3 -c "import speech_recognition, gtts, pygame, pymodbus; print('4. 파이썬 라이브러리 OK')"
+python3 -c "import speech_recognition, gtts, pygame; print('4. 파이썬 라이브러리 OK')"
 ```
 
 ---
@@ -389,7 +387,7 @@ python3 src/voice_robot_control/voice_robot_control/nlp_node.py "안녕"
 - Ubuntu 22.04 / ROS 2 Humble
 - MoveIt 2 + `moveit_py` — [처음 설치하는 컴퓨터에서](#처음-설치하는-컴퓨터에서) 참고
 - [doosan-robot2](https://github.com/doosan-robotics/doosan-robot2) (M0609)
-- OnRobot RG2 그리퍼 (없어도 시늉 모드로 실습 가능)
+- Coact(SCHUNK) EGP-C 40 그리퍼 — 로봇 플랜지 디지털 출력 1, 2번 (없어도 시늉 모드로 실습 가능)
 - 인터넷 (⑥ 음성 인식, ⑨ 말하기가 구글 서버를 씁니다)
 - 스피커 (⑨ 가 말합니다. 없으면 화면에 글자로만 나옵니다)
 
@@ -404,7 +402,7 @@ python3 src/voice_robot_control/voice_robot_control/nlp_node.py "안녕"
 | `Package 'dsr_moveit_config_m0609' not found` | 두산 패키지가 없습니다 → [3번](#3-두산-로봇-패키지) |
 | `No module named 'speech_recognition'` | `sudo apt install -y portaudio19-dev python3-dev` 후 `pip install SpeechRecognition pyaudio` |
 | `fatal error: portaudio.h` / `Could not build wheels for pyaudio` | apt 로 `portaudio19-dev python3-dev` 를 먼저 깔고 다시 `pip install` |
-| 그리퍼가 안 움직임 | `pip install "pymodbus==2.5.3"` (3.x 는 안 됩니다) |
+| 그리퍼가 안 움직임 | 로봇 브링업(dsr_bringup2)이 떠 있는지, `~/ros2_ws` 를 source 했는지 확인 |
 
 더 자세한 문제 해결은
 [`src/voice_robot_control/README.md`](src/voice_robot_control/README.md) 에 있습니다.
